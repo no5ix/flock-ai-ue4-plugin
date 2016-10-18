@@ -4,7 +4,7 @@ A fish flock AI VR demo for Unreal Engine 4
 ![github_fish_flock_ai.png](https://ooo.0o0.ooo/2016/10/18/58060a188d281.png)
 
 ## Relevant Links
-* Watch the [Video Preview (coming soon)]()
+* Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 * Download [MyFish.exe (Win64)](http://pan.baidu.com/s/1qYbBrHU)
 * [My Blog](http://blog.csdn.net/nosix)
 
