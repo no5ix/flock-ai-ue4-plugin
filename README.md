@@ -29,7 +29,7 @@ A fish flock AI VR demo for Unreal Engine 4
 * Motion Controller Trigger     => Attract fishes
 
 ## About This Demo
-* Read [read the post on my blog (not finished yet)]() for the details 
+* Read [The Post on My Blog (not finished yet)]() for the details 
 * This project implements a new flocking Ai algorithm, with 2 components : 
 	* Separation : every fish will try to steer away from their neighbors so they don't overlap each other
 	* Following the leader : every fish will try to follow its leader so they never stop and stay together as a group
