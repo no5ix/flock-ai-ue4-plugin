@@ -13,18 +13,20 @@ A fish flock AI VR demo for Unreal Engine 4
 4.13.0
 
 ## Instructions For The Game
-#####PC :
+#####*PC* :
 
-* WASD and EQ for Basic movement 
-* Arrow UP and Down for Moving faster or slower
-* Left Mouse Button for attracting fishes
+* R                 =>  Toggle Pawn Rotation Switch
+* WASD and EQ       =>  Basic movement 
+* Left Mouse Button =>  Attract fishes
+* Arrow UP and Down =>  Move faster or slower
 
-#####VR : 
-(My Device is HTC Vive)
 
-* KeyBoard Arrow UP and Down for Move faster or slower
-* Motion Controller Trigger for attracting fishes
-* Motion Controller FaceButton1 for Moving forward
+#####*VR* : 
+*(My Device is HTC Vive)*
+
+* Motion Controller FaceButton1 => Move forward
+* KeyBoard Arrow UP and Down    => Move faster or slower
+* Motion Controller Trigger     => Attract fishes
 
 ## About This Demo
 * Read [read the post on my blog (not finished yet)]() for the details 
