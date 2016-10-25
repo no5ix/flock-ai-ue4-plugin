@@ -81,11 +81,14 @@ A fish flock AI VR demo for Unreal Engine 4
 
 	> 其他特性
 
-	* avoiding enemies.
+	* Avoiding enemies.
 
 		`躲避敌人`
 
-	* run **1200+** fishes at the same time
+	* Run **1200+** fishes at the same time
 
 		`可以同时运行 1200+ 条鱼儿`
 
+	* Wander when no leader
+
+		`当没有领头者的时候随机漫游`
