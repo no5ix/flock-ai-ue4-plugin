@@ -20,6 +20,7 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "Fish.h"
 #include "CheckFishCharacter.generated.h"
 
 UCLASS()
@@ -38,8 +39,8 @@ public:
 
 	UPROPERTY(Category = AI, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* CameraCpp;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fish Attributes")
-		TArray<UClass*> NeighborhoodTypes;
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fish Attributes")
+	// 	TArray<UClass*> NeighborhoodTypes;
 
 	float SumNearbyFish;
 protected:

@@ -17,9 +17,12 @@
 * =================================================*/
 #pragma once
 
-#include "GameFramework/Actor.h"
 #include "CheckFishCharacter.h"
+#include "GameFramework/Actor.h"
+#include "FishLeader.h"
 #include "Fish.generated.h"
+
+class ACheckFishCharacter;
 
 UCLASS()
 class MYFISH_API AFish : public AActor
@@ -58,7 +61,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
 		float TurnSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = FishFlock)
 		float CurrentMovementSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
@@ -71,12 +74,40 @@ public:
 		AActor *Leader;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
-		UClass* LeaderClass;
+		TSubclassOf<AFishLeader> LeaderClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		float WanderRangeX;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		float WanderRangeY;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		float WanderRangeZ;
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = FishFlock)
+		FVector DestLocation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		float MaxModifyDestInterval;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		float MinModifyDestInterval;
+
+
+	// wander;
+	void SetSpawnLocation();
+	bool IsAlreadyWander;
+	bool IsSetSpawnLocation;
+	void SetDestLocationNSpeed();
+	float ModifyDestInterval;
+	FTimerHandle UnusedHandle;
 
 	FVector SeparationComponent;
 	FVector FollowLeaderComponent;
 	FVector EnemyComponent;
+
 	ACheckFishCharacter *MyPawn;
 	APlayerController* PController;
 	FVector2D ScreenPosition;
@@ -146,15 +177,17 @@ public:
 	void CalculateFlockNewMoveVector(float DeltaTime);
 	void SetLeader();
 	void GetGameViewportSizeUntilGet();
-	void UpdateTickIntervalAndCheckSphereRadius(bool IsHasEnemy, FVector CurrentFishLocation);
+	void UpdateTickIntervalAndCheckSphereRadius(bool _IsHasEnemy, FVector _CurrentFishLocation);
 
 	FVector2D GetGameViewportSize();
 
 	FVector2D GetGameResolution();
+		
+	FVector SpawnLocation;
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
-		FVector NewMoveVector;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+	FVector NewMoveVector;
 
 	bool IsSetLeaderUp;
 	bool IsGetGameViewportSize;

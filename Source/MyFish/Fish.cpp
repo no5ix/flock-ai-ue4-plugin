@@ -20,6 +20,7 @@
 #include "Fish.h"
 #include "Stimulus.h"
 #include "FishLeader.h"
+#include "CheckFishCharacter.h"
 // #include "WidgetLayoutLibrary.h"
 
 
@@ -29,6 +30,14 @@ AFish::AFish()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.TickInterval = 0.03f;
+
+	IsSetSpawnLocation= false;
+	IsAlreadyWander = false;
+	SpawnLocation = FVector(0, 0, 0);
+	WanderRangeX = 30000.0f;
+	WanderRangeY = 30000.0f;
+	WanderRangeZ = 30000.0f;
+	DestLocation = FVector(0, 0, 0);
 
 	ScreenMaxX = 1920.0f;
 	ScreenMaxY = 1080.0f;
@@ -101,6 +110,7 @@ void AFish::BeginPlay()
 
 	PController = GetWorld()->GetFirstPlayerController();
 	NewMoveVector = GetActorRotation().Vector().GetSafeNormal();
+
 }
 
 // Called every frame
@@ -110,8 +120,10 @@ void AFish::Tick(float DeltaTime)
 
 	SetLeader();
 
+	SetSpawnLocation();
+
 	GetGameViewportSizeUntilGet();
-	if (IsGetGameViewportSize && IsSetLeaderUp)
+	if (IsGetGameViewportSize)
 	{
 		ResetComponents();
 		CalculateFlockNewMoveVector(DeltaTime);
@@ -119,12 +131,27 @@ void AFish::Tick(float DeltaTime)
 	}
 }
 
-
-void AFish::UpdateTickIntervalAndCheckSphereRadius(bool IsHasEnemy, FVector CurrentFishLocation)
+void AFish::SetSpawnLocation()
 {
-	UGameplayStatics::ProjectWorldToScreen(PController, CurrentFishLocation, ScreenPosition);
+	if (!IsSetSpawnLocation)
+	{
 
-	DistanceToPawn = (MyPawn->CameraCpp->GetComponentLocation() - CurrentFishLocation).Size();
+		SpawnLocation = GetActorLocation();	
+		if (SpawnLocation.X != 0 && SpawnLocation.Y != 0 && SpawnLocation.Z != 0)
+		{
+			IsSetSpawnLocation = true;
+		}
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(SpawnLocation.X));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(SpawnLocation.Y));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(SpawnLocation.Z));
+	}
+}
+
+void AFish::UpdateTickIntervalAndCheckSphereRadius(bool _IsHasEnemy, FVector _CurrentFishLocation)
+{
+	UGameplayStatics::ProjectWorldToScreen(PController, _CurrentFishLocation, ScreenPosition);
+
+	DistanceToPawn = (MyPawn->CameraCpp->GetComponentLocation() - _CurrentFishLocation).Size();
 	if (DistanceToPawn > 2000.0f)
 	{
 		if (ScreenPosition.X <= ScreenSecondMaxX && ScreenPosition.X >= ScreenSecondMinX && ScreenPosition.Y <= ScreenSecondMaxY && ScreenPosition.Y >= ScreenSecondMinY)
@@ -363,7 +390,7 @@ void AFish::UpdateTickIntervalAndCheckSphereRadius(bool IsHasEnemy, FVector Curr
 
 
 
-				if (IsHasEnemy)
+				if (_IsHasEnemy)
 				{
 
 					PrimaryActorTick.TickInterval -= 0.005f;
@@ -481,14 +508,34 @@ void AFish::GetGameViewportSizeUntilGet()
 void AFish::CalculateFlockNewMoveVector(float DeltaTime)
 {
 	CurrentFishLocation = GetActorLocation();
+	// if (this->Leader)
+	// {
+
+	// 	leaderLocation = this->Leader->GetActorLocation();
+	// 	FollowLeaderComponent =
+	// 		leaderLocation -
+	// 		CurrentFishLocation;
+	// 	FollowLeaderComponent.Normalize();
+
+	// 	if (this->GetDistanceTo(this->Leader) > this->distBehindSpeedUpRange)
+	// 	{
+	// 		// Set Speed
+	// 		this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->MaxMovementSpeed, DeltaTime);
+
+	// 	}
+	// 	else
+	// 	{
+	// 		// Set Speed
+	// 		this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->BaseMovementSpeed, DeltaTime);
+	// 	}
+	// }
+
+	//Maintain distance behind Leader
 	if (this->Leader)
 	{
 
-		leaderLocation = this->Leader->GetActorLocation();
-		FollowLeaderComponent =
-			leaderLocation -
-			CurrentFishLocation;
-		FollowLeaderComponent.Normalize();
+		// Calculate all seperation and distance behind leader into one vector
+		DestLocation = this->Leader->GetActorLocation();
 
 		if (this->GetDistanceTo(this->Leader) > this->distBehindSpeedUpRange)
 		{
@@ -502,6 +549,23 @@ void AFish::CalculateFlockNewMoveVector(float DeltaTime)
 			this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->BaseMovementSpeed, DeltaTime);
 		}
 	}
+	else
+	{
+		if (!IsAlreadyWander)
+		{
+			// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("xixi"));
+			ModifyDestInterval = FMath::FRandRange(MinModifyDestInterval, MaxModifyDestInterval);
+			// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(ModifyDestInterval));
+			GetWorldTimerManager().SetTimer(UnusedHandle, this, &AFish::SetDestLocationNSpeed, ModifyDestInterval, true);
+			IsAlreadyWander = true;
+		}
+	}
+		
+	FollowLeaderComponent = 
+		//distBehind + 
+		DestLocation -
+		CurrentFishLocation;
+	FollowLeaderComponent.Normalize();
 
 	CheckSphere->GetOverlappingActors(Neighbourhood);
 
@@ -592,4 +656,31 @@ FVector2D AFish::GetGameResolution()
 	Result.Y = GSystemResolution.ResY;
 
 	return Result;
+}
+
+void AFish::SetDestLocationNSpeed()
+{
+
+
+	// int RandNum = 1;
+	// RandNum = FMath::RandRange(1, 2);
+	if (FMath::RandRange(1, 2) == 1)
+	{
+		// Set Speed
+		this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->MaxMovementSpeed, 0.05);
+
+	}
+	else
+	{
+		// Set Speed
+		this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->BaseMovementSpeed, 0.1);
+	}
+	DestLocation = FVector(
+		FMath::FRandRange(SpawnLocation.X-WanderRangeX, SpawnLocation.X+WanderRangeX), 
+		FMath::FRandRange(SpawnLocation.Y-WanderRangeY, SpawnLocation.Y+WanderRangeY), 
+		FMath::FRandRange(SpawnLocation.Z-WanderRangeZ, SpawnLocation.Z+WanderRangeZ)
+	);
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(DestLocation.X));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(DestLocation.Y));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(DestLocation.Z));
 }

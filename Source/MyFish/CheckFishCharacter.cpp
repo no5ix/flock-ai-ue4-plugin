@@ -52,7 +52,8 @@ void ACheckFishCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AA
 {
 
 
-	if (NeighborhoodTypes.Find(OtherActor->GetClass()) >= 0)
+	// if (NeighborhoodTypes.Find(OtherActor->GetClass()) >= 0)
+	if (OtherActor->IsA(AFish::StaticClass()))
 	{
 		SumNearbyFish++;
 	}
@@ -61,7 +62,8 @@ void ACheckFishCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AA
 
 void ACheckFishCharacter::OnEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (NeighborhoodTypes.Find(OtherActor->GetClass()) >= 0)
+	// if (NeighborhoodTypes.Find(OtherActor->GetClass()) >= 0)
+	if (OtherActor->IsA(AFish::StaticClass()))
 	{
 		SumNearbyFish--;
 	}

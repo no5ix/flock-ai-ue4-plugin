@@ -20,27 +20,86 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Fish.h"
 #include "Stimulus.generated.h"
 
 UCLASS()
 class MYFISH_API AStimulus : public AActor
 {
-	GENERATED_BODY()
+// 	GENERATED_BODY()
 
-public:
+// public:
+// 	// Sets default values for this actor's properties
+// 	AStimulus();
+
+// 	virtual void BeginPlay() override;
+
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+// 		TArray<UClass*> FishType;
+
+// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+// 		TArray<float> CountInFish;
+
+// 	UFUNCTION(BlueprintCallable, Category = Config)
+// 		void SpawnFish();
+
+
+// };
+	GENERATED_BODY()
+	
+public:	
 	// Sets default values for this actor's properties
 	AStimulus();
 
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
-		TArray<UClass*> FishType;
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+	// 	TArray<UClass*> FishType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
-		TArray<float> CountInFish;
+		TSubclassOf<AFish> FishType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		int CountInFish;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		float SpawnMaxRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		float SpawnMinRange;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		float FishLifeSpan;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		bool IsRinglike;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		float SpawnDuration;
 
 	UFUNCTION(BlueprintCallable, Category = Config)
-		void SpawnFish();
+	void SpawnFish();
 
+	void SpawnFishes();
 
+	void SpanwWanderFishesNClearTimer();
+	void SpanwWanderFishes();
+
+	void SpanwCommonFishes();
+	void SpawnCommonFishesNClearTimer();
+
+	float maxX;
+	float maxY;
+	float maxZ;
+	float minX;
+	float minY;
+	float minZ;
+
+	int count;
+	FTimerHandle UnusedHandle;
+	FVector spawnLoc;
+
+	
+
+	
 };
