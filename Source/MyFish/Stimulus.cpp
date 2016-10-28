@@ -61,7 +61,7 @@ AStimulus::AStimulus()
 void AStimulus::BeginPlay()
 {
 	Super::BeginPlay();
-	SpawnFish();
+	// SpawnFish();
 }
 
 void AStimulus::SpawnFish()
@@ -164,10 +164,17 @@ void AStimulus::SpanwWanderFishes()
 
 void AStimulus::SpawnFishes()
 {
-	AFish * aFish = Cast<AFish>(GetWorld()->SpawnActor(FishType));
-	aFish->SetLifeSpan(FishLifeSpan);
-	spawnLoc = FVector(FMath::FRandRange(minX, maxX), FMath::FRandRange(minY, maxY), FMath::FRandRange(minZ, maxZ));
-	aFish->SetActorLocation(spawnLoc);
+	if (FishType)
+	{
+		AFish * aFish = Cast<AFish>(GetWorld()->SpawnActor(FishType));
+		aFish->SetLifeSpan(FishLifeSpan);
+		spawnLoc = FVector(FMath::FRandRange(minX, maxX), FMath::FRandRange(minY, maxY), FMath::FRandRange(minZ, maxZ));
+		aFish->SetActorLocation(spawnLoc);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString("Warning!! BP_Spawner FishType is EMPTY!"));
+	}
 }
 
 void AStimulus::SpanwWanderFishesNClearTimer()

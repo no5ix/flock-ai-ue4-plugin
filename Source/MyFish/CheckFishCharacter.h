@@ -39,10 +39,9 @@ public:
 
 	UPROPERTY(Category = AI, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* CameraCpp;
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fish Attributes")
-	// 	TArray<UClass*> NeighborhoodTypes;
 
 	float SumNearbyFish;
+	
 protected:
 
 

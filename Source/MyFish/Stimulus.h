@@ -26,25 +26,6 @@
 UCLASS()
 class MYFISH_API AStimulus : public AActor
 {
-// 	GENERATED_BODY()
-
-// public:
-// 	// Sets default values for this actor's properties
-// 	AStimulus();
-
-// 	virtual void BeginPlay() override;
-
-// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
-// 		TArray<UClass*> FishType;
-
-// 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
-// 		TArray<float> CountInFish;
-
-// 	UFUNCTION(BlueprintCallable, Category = Config)
-// 		void SpawnFish();
-
-
-// };
 	GENERATED_BODY()
 	
 public:	

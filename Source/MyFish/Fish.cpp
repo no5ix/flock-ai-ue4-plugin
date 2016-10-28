@@ -508,27 +508,6 @@ void AFish::GetGameViewportSizeUntilGet()
 void AFish::CalculateFlockNewMoveVector(float DeltaTime)
 {
 	CurrentFishLocation = GetActorLocation();
-	// if (this->Leader)
-	// {
-
-	// 	leaderLocation = this->Leader->GetActorLocation();
-	// 	FollowLeaderComponent =
-	// 		leaderLocation -
-	// 		CurrentFishLocation;
-	// 	FollowLeaderComponent.Normalize();
-
-	// 	if (this->GetDistanceTo(this->Leader) > this->distBehindSpeedUpRange)
-	// 	{
-	// 		// Set Speed
-	// 		this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->MaxMovementSpeed, DeltaTime);
-
-	// 	}
-	// 	else
-	// 	{
-	// 		// Set Speed
-	// 		this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->BaseMovementSpeed, DeltaTime);
-	// 	}
-	// }
 
 	//Maintain distance behind Leader
 	if (this->Leader)
@@ -660,10 +639,6 @@ FVector2D AFish::GetGameResolution()
 
 void AFish::SetDestLocationNSpeed()
 {
-
-
-	// int RandNum = 1;
-	// RandNum = FMath::RandRange(1, 2);
 	if (FMath::RandRange(1, 2) == 1)
 	{
 		// Set Speed
@@ -680,7 +655,4 @@ void AFish::SetDestLocationNSpeed()
 		FMath::FRandRange(SpawnLocation.Y-WanderRangeY, SpawnLocation.Y+WanderRangeY), 
 		FMath::FRandRange(SpawnLocation.Z-WanderRangeZ, SpawnLocation.Z+WanderRangeZ)
 	);
-		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(DestLocation.X));
-		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(DestLocation.Y));
-		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(DestLocation.Z));
 }
