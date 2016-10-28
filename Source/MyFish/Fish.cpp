@@ -52,7 +52,7 @@ AFish::AFish()
 
 	EnemyWeight = 1400.0f;
 	AgentPhysicalRadius = 45.0f;
-	TurnSpeed = 3.0f;
+	TurnSpeed = 1.0f;
 	CurrentMovementSpeed = BaseMovementSpeed;
 
 	SeparationComponent = FVector(0, 0, 0);
