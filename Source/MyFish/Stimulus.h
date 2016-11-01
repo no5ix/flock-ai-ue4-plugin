@@ -32,7 +32,9 @@ public:
 	// Sets default values for this actor's properties
 	AStimulus();
 
-	virtual void BeginPlay() override;
+	// virtual void BeginPlay() override;
+	// Called every frame
+	// virtual void Tick(float DeltaSeconds) override;
 
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
 	// 	TArray<UClass*> FishType;

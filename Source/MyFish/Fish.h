@@ -70,8 +70,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
 		float FollowLeaderWeight;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
-		AActor *Leader;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = FishFlock)
+		AFishLeader *Leader;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
 		TSubclassOf<AFishLeader> LeaderClass;
@@ -94,6 +94,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
 		float MinModifyDestInterval;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		bool EnableFollowLeaderPath;
 
 
 	// wander;
@@ -184,6 +187,8 @@ public:
 	FVector2D GetGameResolution();
 		
 	FVector SpawnLocation;
+
+	int NextIndex;
 
 protected:
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)

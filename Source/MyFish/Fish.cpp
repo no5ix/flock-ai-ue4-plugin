@@ -31,6 +31,9 @@ AFish::AFish()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.TickInterval = 0.03f;
 
+	NextIndex = 0;
+	EnableFollowLeaderPath = false;
+
 	IsSetSpawnLocation= false;
 	IsAlreadyWander = false;
 	SpawnLocation = FVector(0, 0, 0);
@@ -53,7 +56,6 @@ AFish::AFish()
 	EnemyWeight = 1400.0f;
 	AgentPhysicalRadius = 45.0f;
 	TurnSpeed = 1.0f;
-	CurrentMovementSpeed = BaseMovementSpeed;
 
 	SeparationComponent = FVector(0, 0, 0);
 	EnemyComponent = FVector(0, 0, 0);
@@ -110,6 +112,8 @@ void AFish::BeginPlay()
 
 	PController = GetWorld()->GetFirstPlayerController();
 	NewMoveVector = GetActorRotation().Vector().GetSafeNormal();
+	CurrentMovementSpeed = BaseMovementSpeed;
+
 
 }
 
@@ -129,6 +133,7 @@ void AFish::Tick(float DeltaTime)
 		CalculateFlockNewMoveVector(DeltaTime);
 
 	}
+		// GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString("Warning!! BP_Spawner FishType is EMPTY!"));
 }
 
 void AFish::SetSpawnLocation()
@@ -440,7 +445,7 @@ void AFish::SetLeader()
 		UGameplayStatics::GetAllActorsOfClass(this, LeaderClass, aFishLeaderList);
 		if (aFishLeaderList.Num())
 		{
-			Leader = aFishLeaderList[0];
+			Leader = Cast<AFishLeader>(aFishLeaderList[0]);
 			IsSetLeaderUp = true;
 		}
 	}
@@ -498,8 +503,8 @@ void AFish::GetGameViewportSizeUntilGet()
 
 			IsGetGameViewportSize = true;
 		}
-		/* GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(GameViewportSize.X));
-		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(GameViewportSize.Y));*/
+		//  GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(GameViewportSize.X));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(GameViewportSize.Y));
 	}
 
 }
@@ -508,43 +513,6 @@ void AFish::GetGameViewportSizeUntilGet()
 void AFish::CalculateFlockNewMoveVector(float DeltaTime)
 {
 	CurrentFishLocation = GetActorLocation();
-
-	//Maintain distance behind Leader
-	if (this->Leader)
-	{
-
-		// Calculate all seperation and distance behind leader into one vector
-		DestLocation = this->Leader->GetActorLocation();
-
-		if (this->GetDistanceTo(this->Leader) > this->distBehindSpeedUpRange)
-		{
-			// Set Speed
-			this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->MaxMovementSpeed, DeltaTime);
-
-		}
-		else
-		{
-			// Set Speed
-			this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->BaseMovementSpeed, DeltaTime);
-		}
-	}
-	else
-	{
-		if (!IsAlreadyWander)
-		{
-			// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("xixi"));
-			ModifyDestInterval = FMath::FRandRange(MinModifyDestInterval, MaxModifyDestInterval);
-			// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(ModifyDestInterval));
-			GetWorldTimerManager().SetTimer(UnusedHandle, this, &AFish::SetDestLocationNSpeed, ModifyDestInterval, true);
-			IsAlreadyWander = true;
-		}
-	}
-		
-	FollowLeaderComponent = 
-		//distBehind + 
-		DestLocation -
-		CurrentFishLocation;
-	FollowLeaderComponent.Normalize();
 
 	CheckSphere->GetOverlappingActors(Neighbourhood);
 
@@ -579,12 +547,86 @@ void AFish::CalculateFlockNewMoveVector(float DeltaTime)
 	}
 
 	UpdateTickIntervalAndCheckSphereRadius(IsHasEnemy, CurrentFishLocation);
-
+	// this->CurrentMovementSpeed = 300 * PrimaryActorTick.TickInterval / 0.005;
 
 	if (IsHasEnemy == false && NeighbourhoodNum > 0)
 	{
 		SeparationComponent = (SeparationComponent * 100.0f * (5.0f / (float)NeighbourhoodNum)) + SeparationComponent * 100;
 	}
+
+	//Maintain distance behind Leader
+	if (this->Leader)
+	// if (this->Leader)
+	{
+
+		if (EnableFollowLeaderPath)
+		{
+			// Calculate all seperation and distance behind leader into one vector
+			// IndexIncreaseRate = 0;
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("::SanitizeFloat(DestLocation.Y"));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(NextIndex));
+			// if (this->Leader->LeaderLocation.IsValidIndex(NextIndex))
+			// {
+				// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("::SanitizeFloat(DestLocation.xx"));
+				DestLocation = this->Leader->NextLeaderLocation;
+
+				if ( (GetActorLocation() - DestLocation).Size() > this->distBehindSpeedUpRange)
+				{
+					// Set Speed
+					this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->MaxMovementSpeed, DeltaTime);
+
+				}
+				else
+				{
+					// Set Speed
+					this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->BaseMovementSpeed, DeltaTime);
+				}
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(DestLocation.Y));
+				// DestLocation = this->Leader->GetActorLocation();
+
+			// }
+			// else
+			// {
+
+			// 	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("Maybe u should increase Leader's TickInterval"));
+			// }
+			// NextIndex++;
+		}
+		else
+		{
+			DestLocation = this->Leader->GetActorLocation();
+
+			if (this->GetDistanceTo(this->Leader) > this->distBehindSpeedUpRange)
+			{
+				// Set Speed
+				this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->MaxMovementSpeed, DeltaTime);
+
+			}
+			else
+			{
+				// Set Speed
+				this->CurrentMovementSpeed = FMath::Lerp(this->CurrentMovementSpeed, this->BaseMovementSpeed, DeltaTime);
+			}
+		}
+		
+	}
+	else
+	{
+		if (!IsAlreadyWander)
+		{
+			// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("xixi"));
+			ModifyDestInterval = FMath::FRandRange(MinModifyDestInterval, MaxModifyDestInterval);
+			// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(ModifyDestInterval));
+			GetWorldTimerManager().SetTimer(UnusedHandle, this, &AFish::SetDestLocationNSpeed, ModifyDestInterval, true);
+			IsAlreadyWander = true;
+		}
+	}
+		
+	FollowLeaderComponent = 
+		//distBehind + 
+		DestLocation -
+		CurrentFishLocation;
+	FollowLeaderComponent.Normalize();
 
 
 	NewMoveVector =

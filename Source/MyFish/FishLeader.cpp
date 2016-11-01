@@ -28,14 +28,45 @@
 AFishLeader::AFishLeader()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	EnableSplineTick = true;
-	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LeaderFish"));
-	RootComponent = MeshComponent;
+	NextLeaderLocation = FVector(0, 0, 0);
+	Index = 0;
+
 }
 
 void AFishLeader::BeginPlay()
 {
-	MeshComponent->SetVisibility(false);
+	Super::BeginPlay();
+
+	GetWorldTimerManager().SetTimer(UnusedHandle, this, &AFishLeader::SetNextLeaderLocation, LeaderTimerInterval, true);
+}
+
+void AFishLeader::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	LeaderLocation.Add(GetActorLocation());
+
+	// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(LeaderLocation.Last().X));
+	// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(LeaderLocation.Last().Y));
+	// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(LeaderLocation.Last().Z));
+
+}
+
+void AFishLeader::SetNextLeaderLocation()
+{	
+	if (LeaderLocation.IsValidIndex(Index))
+	{
+		NextLeaderLocation = LeaderLocation[Index];
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(Index));
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("Maybe u should increase Leader's TickInterval !!"));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(Index));
+
+	}
+
+	Index++;
 }

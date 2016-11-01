@@ -58,55 +58,61 @@ AStimulus::AStimulus()
 	
 }
 
-void AStimulus::BeginPlay()
-{
-	Super::BeginPlay();
-	// SpawnFish();
-}
+// void AStimulus::BeginPlay()
+// {
+// 	Super::BeginPlay();
+// 	// SpawnFish();
+// }
 
 void AStimulus::SpawnFish()
 {
-	if (CountInFish <= 0)
-		return;
-	if (IsRinglike)
+	if (CountInFish > 0 && FishType)
 	{
-		if (SpawnMaxRange < 0)
-			SpawnMaxRange *= -1;
-		if (SpawnMinRange < 0)
-			SpawnMinRange *= -1;
-
-		if (SpawnDuration > 1)
+		if (IsRinglike)
 		{
-			GetWorldTimerManager().SetTimer(UnusedHandle, this, &AStimulus::SpanwWanderFishesNClearTimer, SpawnDuration / CountInFish, true);
+			if (SpawnMaxRange < 0)
+				SpawnMaxRange *= -1;
+			if (SpawnMinRange < 0)
+				SpawnMinRange *= -1;
+
+			if (SpawnDuration > 1)
+			{
+				GetWorldTimerManager().SetTimer(UnusedHandle, this, &AStimulus::SpanwWanderFishesNClearTimer, SpawnDuration / CountInFish, true);
+			}
+			else
+			{
+				for(int i = 0; i < CountInFish; i++)
+				{
+					SpanwWanderFishes();
+				}
+			}
 		}
 		else
 		{
-			for(int i = 0; i < CountInFish; i++)
+			maxX = GetActorLocation().X + SpawnMaxRange;
+			maxY = GetActorLocation().Y + SpawnMaxRange;
+			maxZ = GetActorLocation().Z + SpawnMaxRange;
+
+			minX = GetActorLocation().X + SpawnMinRange;
+			minY = GetActorLocation().Y + SpawnMinRange;
+			minZ = GetActorLocation().Z + SpawnMinRange;
+			if (SpawnDuration > 1)
 			{
-				SpanwWanderFishes();
+				GetWorldTimerManager().SetTimer(UnusedHandle, this, &AStimulus::SpawnCommonFishesNClearTimer, SpawnDuration / CountInFish, true);
+			}
+			else
+			{
+				for(int i = 0; i < CountInFish; i++)
+				{
+					SpanwCommonFishes();
+				}
 			}
 		}
 	}
 	else
 	{
-		maxX = GetActorLocation().X + SpawnMaxRange;
-		maxY = GetActorLocation().Y + SpawnMaxRange;
-		maxZ = GetActorLocation().Z + SpawnMaxRange;
-
-		minX = GetActorLocation().X + SpawnMinRange;
-		minY = GetActorLocation().Y + SpawnMinRange;
-		minZ = GetActorLocation().Z + SpawnMinRange;
-		if (SpawnDuration > 1)
-		{
-			GetWorldTimerManager().SetTimer(UnusedHandle, this, &AStimulus::SpawnCommonFishesNClearTimer, SpawnDuration / CountInFish, true);
-		}
-		else
-		{
-			for(int i = 0; i < CountInFish; i++)
-			{
-				SpanwCommonFishes();
-			}
-		}
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString("Warning!! A BP_Spawner FishType is EMPTY OR CountInFish is invalid !"));
+		return;
 	}
 		
 }
@@ -164,17 +170,11 @@ void AStimulus::SpanwWanderFishes()
 
 void AStimulus::SpawnFishes()
 {
-	if (FishType)
-	{
-		AFish * aFish = Cast<AFish>(GetWorld()->SpawnActor(FishType));
-		aFish->SetLifeSpan(FishLifeSpan);
-		spawnLoc = FVector(FMath::FRandRange(minX, maxX), FMath::FRandRange(minY, maxY), FMath::FRandRange(minZ, maxZ));
-		aFish->SetActorLocation(spawnLoc);
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString("Warning!! BP_Spawner FishType is EMPTY!"));
-	}
+	
+	AFish * aFish = Cast<AFish>(GetWorld()->SpawnActor(FishType));
+	aFish->SetLifeSpan(FishLifeSpan);
+	spawnLoc = FVector(FMath::FRandRange(minX, maxX), FMath::FRandRange(minY, maxY), FMath::FRandRange(minZ, maxZ));
+	aFish->SetActorLocation(spawnLoc);
 }
 
 void AStimulus::SpanwWanderFishesNClearTimer()

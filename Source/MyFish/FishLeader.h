@@ -32,11 +32,25 @@ public:
 	// Sets default values for this actor's properties
 	AFishLeader();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
-		bool EnableSplineTick;
-	UPROPERTY(Category = Mesh, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class UStaticMeshComponent* MeshComponent;
-
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaSeconds) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		bool EnableSplineTick;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		float LeaderTimerInterval;
+
+
+	TArray<FVector> LeaderLocation;
+
+	void SetNextLeaderLocation();
+	FTimerHandle UnusedHandle;
+
+	FVector NextLeaderLocation;
+	int Index;
+
+	bool isInitTimer;
+
 };
