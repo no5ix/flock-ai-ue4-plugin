@@ -22,6 +22,20 @@
 #include "FishLeader.h"
 #include "Fish.generated.h"
 
+UENUM()
+namespace FishMoveMode
+{
+	enum Type
+	{
+		Common,
+		StrictFollowLeaderPath,
+		Wander,
+		Ellipse,
+		Spiral,
+		RotateAroundBoss,
+	};
+}
+
 class ACheckFishCharacter;
 
 UCLASS()
@@ -76,27 +90,38 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
 		TSubclassOf<AFishLeader> LeaderClass;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FishFlock|Wander")
 		float WanderRangeX;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FishFlock|Wander")
 		float WanderRangeY;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FishFlock|Wander")
 		float WanderRangeZ;
 
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = FishFlock)
 		FVector DestLocation;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FishFlock|Wander")
 		float MaxModifyDestInterval;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FishFlock|Wander")
 		float MinModifyDestInterval;
 
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+	// 	bool EnableFollowLeaderPath;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
-		bool EnableFollowLeaderPath;
+		TEnumAsByte<FishMoveMode::Type> MoveMode = FishMoveMode::Common;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		float tempWeight;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = FishFlock)
+		FVector TempGG;
+
+
 
 
 	// wander;
@@ -177,10 +202,18 @@ public:
 	bool IsHasEnemy;
 
 	void ResetComponents();
+
 	void CalculateFlockNewMoveVector(float DeltaTime);
+	void CommonAndStrictFollowLeaderPathAndWanderMode(float DeltaTime);
+	void EllipseMode();
+	void SpiralMode();
+	void RotateAroundBossMode();
+
+	void SetWanderMode();
 	void SetLeader();
 	void GetGameViewportSizeUntilGet();
 	void UpdateTickIntervalAndCheckSphereRadius(bool _IsHasEnemy, FVector _CurrentFishLocation);
+	// void MoveMode();
 
 	FVector2D GetGameViewportSize();
 
@@ -189,6 +222,7 @@ public:
 	FVector SpawnLocation;
 
 	int NextIndex;
+	FVector LastDestLocation;
 
 protected:
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)

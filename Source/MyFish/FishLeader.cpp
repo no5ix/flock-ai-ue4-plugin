@@ -32,7 +32,10 @@ AFishLeader::AFishLeader()
 
 	EnableSplineTick = true;
 	NextLeaderLocation = FVector(0, 0, 0);
-	Index = 0;
+	AddLeaderTimerInterval = 0;
+	RemoveLeaderLocationInterval = 0;
+	AddIndex = 0;
+	RemoveIndex = 0;
 
 }
 
@@ -40,7 +43,8 @@ void AFishLeader::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorldTimerManager().SetTimer(UnusedHandle, this, &AFishLeader::SetNextLeaderLocation, LeaderTimerInterval, true);
+	GetWorldTimerManager().SetTimer(UnusedHandle, this, &AFishLeader::AddNextLeaderLocation, AddLeaderTimerInterval, true);
+	GetWorldTimerManager().SetTimer(UnusedHandle, this, &AFishLeader::RemoveLeaderLocation, RemoveLeaderLocationInterval, true);
 }
 
 void AFishLeader::Tick(float DeltaSeconds)
@@ -54,19 +58,37 @@ void AFishLeader::Tick(float DeltaSeconds)
 
 }
 
-void AFishLeader::SetNextLeaderLocation()
+void AFishLeader::AddNextLeaderLocation()
 {	
-	if (LeaderLocation.IsValidIndex(Index))
+	if (LeaderLocation.IsValidIndex(AddIndex))
 	{
-		NextLeaderLocation = LeaderLocation[Index];
-		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(Index));
+		NextLeaderLocation = LeaderLocation[AddIndex];
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(AddIndex));
 	}
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("Maybe u should increase Leader's TickInterval !!"));
-		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(Index));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(AddIndex));
 
 	}
 
-	Index++;
+	AddIndex++;
+}
+
+void AFishLeader::RemoveLeaderLocation()
+{	
+	if (LeaderLocation.IsValidIndex(RemoveIndex))
+	{
+
+		LeaderLocation.RemoveAt(RemoveIndex);
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(RemoveIndex));
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString("Maybe u should increase Leader's TickInterval !!"));
+		// GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, FString::SanitizeFloat(RemoveIndex));
+
+	}
+
+	RemoveIndex++;
 }

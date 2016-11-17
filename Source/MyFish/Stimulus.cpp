@@ -129,7 +129,7 @@ void AStimulus::SpawnCommonFishesNClearTimer()
 
 void AStimulus::SpanwCommonFishes()
 {
-	SpawnFishes();
+	DoSpawnFishes();
 }
 
 void AStimulus::SpanwWanderFishes()
@@ -165,10 +165,10 @@ void AStimulus::SpanwWanderFishes()
 	}
 	maxZ = GetActorLocation().Z + SpawnMaxRange;
 	minZ = GetActorLocation().Z + SpawnMinRange;
-	SpawnFishes();
+	DoSpawnFishes();
 }
 
-void AStimulus::SpawnFishes()
+void AStimulus::DoSpawnFishes()
 {
 	
 	AFish * aFish = Cast<AFish>(GetWorld()->SpawnActor(FishType));

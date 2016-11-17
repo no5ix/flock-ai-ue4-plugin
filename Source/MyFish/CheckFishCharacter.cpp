@@ -17,6 +17,7 @@
 * =================================================*/
 
 #include "MyFish.h"
+#include "Fish.h"
 #include "CheckFishCharacter.h"
 
 

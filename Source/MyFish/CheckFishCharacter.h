@@ -20,7 +20,6 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "Fish.h"
 #include "CheckFishCharacter.generated.h"
 
 UCLASS()

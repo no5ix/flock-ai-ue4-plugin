@@ -40,16 +40,20 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
 		bool EnableSplineTick;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
-		float LeaderTimerInterval;
+		float AddLeaderTimerInterval;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FishFlock)
+		float RemoveLeaderLocationInterval;
 
 
 	TArray<FVector> LeaderLocation;
 
-	void SetNextLeaderLocation();
+	void AddNextLeaderLocation();
+	void RemoveLeaderLocation();
 	FTimerHandle UnusedHandle;
 
 	FVector NextLeaderLocation;
-	int Index;
+	int AddIndex;
+	int RemoveIndex;
 
 	bool isInitTimer;
 

@@ -35,6 +35,7 @@ void ULocalMPViewportClient::PostInitProperties()
 	P2Keys.Add(EKeys::P);
 	P2Keys.Add(EKeys::I);
 	P2Keys.Add(EKeys::RightMouseButton);
+
 }
 
 bool ULocalMPViewportClient::InputKey(FViewport* Viewport, int32 ControllerId, FKey Key, EInputEvent EventType, float AmountDepressed, bool bGamepad)

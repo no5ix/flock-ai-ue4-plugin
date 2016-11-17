@@ -63,7 +63,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Config)
 	void SpawnFish();
 
-	void SpawnFishes();
+	void DoSpawnFishes();
 
 	void SpanwWanderFishesNClearTimer();
 	void SpanwWanderFishes();
