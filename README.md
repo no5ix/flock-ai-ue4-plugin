@@ -1,13 +1,13 @@
 # Flock-AI-Fish-Unreal
 
 
-###A fish flock AI Plugin for Unreal Engine 4
+A fish flock AI Plugin for Unreal Engine 4
 
-> 一个基于虚幻4的鱼群AI插件 
+> 一个基于虚幻4的鱼群 AI 插件 
 
-#####this Plugin version can Run **2000+** fishes at the same time
+this Plugin version can Run **2000+** fishes at the same time
 
-> 这个插件版本可以同时运行 2200+ 条鱼儿
+> 这个插件版本可以同时运行 **2000+** 条鱼儿
 
 ![OldDemoScreenshot.png](OldDemoScreenshot.png)
 
