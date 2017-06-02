@@ -9,7 +9,7 @@
 
 > 这个插件版本可以同时运行 2200+ 条鱼儿
 
-![OldDemoScreenshot.png](./../UnrealFishFlockAIVR/OldDemoScreenshot.png)
+![OldDemoScreenshot.png](OldDemoScreenshot.png)
 
 ## Relevant Links 
 * Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
