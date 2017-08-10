@@ -1,4 +1,4 @@
-# Flock-AI-Fish-Unreal
+# Flock-AI-Fish-Unreal-Plugin
 
 
 A fish flock AI Plugin for Unreal Engine 4
@@ -16,9 +16,11 @@ this Plugin version can Run **2000+** fishes at the same time
 
 	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
 
-* Download [MyFish.exe (Win64)](http://pan.baidu.com/s/1qYbBrHU)
+* Download [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU)  (*This is packaged by an unoptimized version( check out  branch old_demo)*)
 
-	> 下载  [MyFish.exe (Win64)](http://pan.baidu.com/s/1qYbBrHU) 玩玩 
+	> 下载  [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU) 玩玩 
+
+    > *这个包是没有经过优化过的版本打包出来的(是用old_demo分支的版本打包的)*
 
 * [My Blog](http://blog.csdn.net/nosix)
 
@@ -49,3 +51,4 @@ this Plugin version can Run **2000+** fishes at the same time
 	* Avoiding enemies.
 
 		`躲避敌人`
+
