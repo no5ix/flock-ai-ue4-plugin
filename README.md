@@ -1,8 +1,10 @@
 # Flock-AI-Fish-Unreal-VR
 
 
-A fish flock AI VR demo for Unreal Engine 4 
-> 一个基于虚幻4的鱼群AI的VR demo  
+A fish flock AI VR demo for Unreal Engine 4 *(This is an unoptimized version( check out branch master for the latest code ))*
+> 一个基于虚幻4的鱼群AI的VR demo *(这是个没有优化过的版本( 最新的代码请切到master分支查看 ))*
+
+
 
 ![github_fish_flock_ai.png](https://ooo.0o0.ooo/2016/10/18/58060a188d281.png)
 
@@ -23,38 +25,40 @@ A fish flock AI VR demo for Unreal Engine 4
 4.13.0
 
 ## Instructions For The Game 
-#####*VR* : 
-*(My Device is HTC Vive)*
 
-* Motion Controller FaceButton1 => Move forward
+- *VR* : 
 
-	` 手柄圆盘上键                  => 往前移动`
+	*(My Device is HTC Vive)*
 
-* KeyBoard Arrow UP and Down    => Move faster or slower
+	* Motion Controller FaceButton1 => Move forward
 
-	` 电脑键盘的上下箭头键          =>  调整移动速度`
+		` 手柄圆盘上键                  => 往前移动`
 
-* Motion Controller Trigger     => Attract fishes
+	* KeyBoard Arrow UP and Down    => Move faster or slower
 
-	` 手柄扳机键                    => 吸引鱼群`
+		` 电脑键盘的上下箭头键          =>  调整移动速度`
 
-#####*PC* :
+	* Motion Controller Trigger     => Attract fishes
 
-* R                  =>  Toggle Pawn Rotation Switch 
+		` 手柄扳机键                    => 吸引鱼群`
 
-	` R键                =>  切换是否角色的上下转动视角开关 `  
+- *PC* :
 
-* WASD and EQ        =>  Basic movement 
+	* R                  =>  Toggle Pawn Rotation Switch 
 
-	` WASD 和 EQ  键     =>  基本的移动指令 `
+		` R键                =>  切换是否角色的上下转动视角开关 `  
 
-* Left Mouse Button  =>  Attract fishes
+	* WASD and EQ        =>  Basic movement 
 
-	` 鼠标左键           =>  吸引鱼群`
+		` WASD 和 EQ  键     =>  基本的移动指令 `
 
-* Arrow UP and Down  =>  Move faster or slower
+	* Left Mouse Button  =>  Attract fishes
 
-	` 上下箭头键         =>  调整移动速度`
+		` 鼠标左键           =>  吸引鱼群`
+
+	* Arrow UP and Down  =>  Move faster or slower
+
+		` 上下箭头键         =>  调整移动速度`
 
 
 
@@ -85,10 +89,11 @@ A fish flock AI VR demo for Unreal Engine 4
 
 		`躲避敌人`
 
-	* Run **1200+** fishes at the same time
+	* Run **1200** fishes at the same time
 
-		`可以同时运行 1200+ 条鱼儿`
+		`可以同时运行 1200 条鱼儿`
 
 	* Wander when no leader
 
 		`当没有领头者的时候随机漫游`
+
