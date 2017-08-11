@@ -29,6 +29,23 @@ this Plugin version can Run **2000+** fishes at the same time
 ## Unreal Engine Version
 4.15.0
 
+## Instructions For The Game 
+
+* EQ        =>  Up & Down
+
+	` EQ  键     =>  上下 `
+
+* WASD         =>  Basic movement 
+
+	` WASD 键     =>  基本的移动指令(前后左右) `
+
+* Hold Left Mouse Button Down  =>  Attract fishes
+
+	` 按住鼠标左键           =>  吸引鱼群`
+
+* Arrow UP and Down  =>  Move faster or slower
+
+	` 上下箭头键         =>  调整移动速度`
 
 ## About This 
 
