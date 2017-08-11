@@ -34,27 +34,27 @@ A fish flock AI VR demo for Unreal Engine 4 *(This is an unoptimized version( ch
 
 		` 手柄圆盘上键                  => 往前移动`
 
-	* KeyBoard Arrow UP and Down    => Move faster or slower
+	* PC's KeyBoard Arrow UP and Down    => Move faster or slower
 
 		` 电脑键盘的上下箭头键          =>  调整移动速度`
 
-	* Motion Controller Trigger     => Attract fishes
+	* Hold Motion Controller Trigger Down     => Attract fishes
 
-		` 手柄扳机键                    => 吸引鱼群`
+		` 按住手柄扳机键                    => 吸引鱼群`
 
 - *PC* :
 
-	* R                  =>  Toggle Pawn Rotation Switch 
+	* EQ        =>  Up & Down
 
-		` R键                =>  切换是否角色的上下转动视角开关 `  
+		` EQ  键     =>  上下 `
 
-	* WASD and EQ        =>  Basic movement 
+	* WASD         =>  Basic movement 
 
-		` WASD 和 EQ  键     =>  基本的移动指令 `
+		` WASD 键     =>  基本的移动指令(前后左右) `
 
-	* Left Mouse Button  =>  Attract fishes
+	* Hold Left Mouse Button Down  =>  Attract fishes
 
-		` 鼠标左键           =>  吸引鱼群`
+		` 按住鼠标左键           =>  吸引鱼群`
 
 	* Arrow UP and Down  =>  Move faster or slower
 
