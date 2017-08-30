@@ -1,5 +1,4 @@
-# Flock-AI-Fish-Unreal-Plugin
-
+# fish
 
 A fish flock AI Plugin for Unreal Engine 4
 
@@ -9,27 +8,23 @@ this Plugin version can Run **2000+** fishes at the same time
 
 > 这个插件版本可以同时运行 **2000+** 条鱼儿
 
-![OldDemoScreenshot.png](OldDemoScreenshot.png)
+![OldDemoScreenshot.png](./image/OldDemoScreenshot.png)
 
-## Relevant Links 
+## Video Preview 
 * Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 
 	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
 
+## Download & Play
+
+#### **Download**
 * Download [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU)  (*This is packaged by an unoptimized version( check out  branch old_demo)*)
 
 	> 下载  [**MyFish.exe (Win64)**](http://pan.baidu.com/s/1qYbBrHU) 玩玩 
 
     > *这个包是没有经过优化过的版本打包出来的(是用old_demo分支的版本打包的)*
 
-* [My Blog](http://blog.csdn.net/nosix)
-
-	> 我的[博客主页](http://blog.csdn.net/nosix)
-
-## Unreal Engine Version
-4.15.0
-
-## Instructions For The Game 
+#### **How to play **
 
 * EQ        =>  Up & Down
 
@@ -47,7 +42,26 @@ this Plugin version can Run **2000+** fishes at the same time
 
 	` 上下箭头键         =>  调整移动速度`
 
+
+## How to use
+
+place Plugins folder in your project root directory, then just like
+> 把Plugins文件夹放在你项目的根目录, 接下来如图
+
+![HowToUse1](./image/HowToUse1.png)
+
+![HowToUse2](./image/HowToUse2.png)
+
+![HowToUse3](./image/HowToUse3.png)
+
+![HowToUse4](./image/HowToUse4.png)
+
 ## About This 
+
+
+* Unreal Engine Version
+
+	4.15
 
 * Read [Craig Reynolds's thesis](http://www.red3d.com/cwr/boids/)  
 
