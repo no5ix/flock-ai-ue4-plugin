@@ -24,7 +24,7 @@ this Plugin version can Run **2000+** fishes at the same time
 
     > *这个包是没有经过优化过的版本打包出来的(是用old_demo分支的版本打包的)*
 
-#### **How to play **
+#### **How to play**
 
 * EQ        =>  Up & Down
 
