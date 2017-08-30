@@ -1,30 +1,25 @@
-# Flock-AI-Fish-Unreal-VR
+# fish
 
 
 A fish flock AI VR demo for Unreal Engine 4 *(This is an unoptimized version( check out branch master for the latest code ))*
 > 一个基于虚幻4的鱼群AI的VR demo *(这是个没有优化过的版本( 最新的代码请切到master分支查看 ))*
 
 
-
 ![github_fish_flock_ai.png](https://ooo.0o0.ooo/2016/10/18/58060a188d281.png)
 
-## Relevant Links 
+## Video Preview 
 * Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 
 	> 查看 [视频演示](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html) 
 
+## Download & Play
+
+#### **Download**
 * Download [MyFish.exe (Win64)](http://pan.baidu.com/s/1qYbBrHU)
 
 	> 下载  [MyFish.exe (Win64)](http://pan.baidu.com/s/1qYbBrHU) 玩玩 
 
-* [My Blog](http://blog.csdn.net/nosix)
-
-	> 我的[博客主页](http://blog.csdn.net/nosix)
-
-## Unreal Engine Version
-4.13.0
-
-## Instructions For The Game 
+#### **How to play**
 
 - *VR* : 
 
@@ -62,12 +57,17 @@ A fish flock AI VR demo for Unreal Engine 4 *(This is an unoptimized version( ch
 
 
 
+## About This 
 
-## About This Demo
+
+* Unreal Engine Version
+
+	4.13
 
 * Read [Craig Reynolds's thesis](http://www.red3d.com/cwr/boids/)  
 
 	> 查看 [Craig Reynolds的论文](http://www.red3d.com/cwr/boids/) 
+
 
 * This project implements a new flocking Ai algorithm, with 2 components : 
 
@@ -96,4 +96,3 @@ A fish flock AI VR demo for Unreal Engine 4 *(This is an unoptimized version( ch
 	* Wander when no leader
 
 		`当没有领头者的时候随机漫游`
-
