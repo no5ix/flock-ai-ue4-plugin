@@ -26,21 +26,40 @@ this Plugin version can Run **2000+** fishes at the same time
 
 #### **How to play**
 
-* EQ        =>  Up & Down
+- *VR* : 
 
-	` EQ  键     =>  上下 `
+	*(My Device is HTC Vive)*
 
-* WASD         =>  Basic movement 
+	* Motion Controller FaceButton1 => Move forward
 
-	` WASD 键     =>  基本的移动指令(前后左右) `
+		` 手柄圆盘上键                  => 往前移动`
 
-* Hold Left Mouse Button Down  =>  Attract fishes
+	* PC's KeyBoard Arrow UP and Down    => Move faster or slower
 
-	` 按住鼠标左键           =>  吸引鱼群`
+		` 电脑键盘的上下箭头键          =>  调整移动速度`
 
-* Arrow UP and Down  =>  Move faster or slower
+	* Hold Motion Controller Trigger Down     => Attract fishes
 
-	` 上下箭头键         =>  调整移动速度`
+		` 按住手柄扳机键                    => 吸引鱼群`
+
+- *PC* :
+
+	* EQ        =>  Up & Down
+
+		` EQ  键     =>  上下 `
+
+	* WASD         =>  Basic movement 
+
+		` WASD 键     =>  基本的移动指令(前后左右) `
+
+	* Hold Left Mouse Button Down  =>  Attract fishes
+
+		` 按住鼠标左键           =>  吸引鱼群`
+
+	* Arrow UP and Down  =>  Move faster or slower
+
+		` 上下箭头键         =>  调整移动速度`
+
 
 
 ## How to use
@@ -67,7 +86,7 @@ place Plugins folder in your project root directory, then just like
 
 	> 查看 [Craig Reynolds的论文](http://www.red3d.com/cwr/boids/) 
 
-* This project implements a new flocking Ai algorithm, with 2 components : 
+* This project implements a new flocking Ai algorithm, with 3 components : 
 
 	> 算法简要
 
