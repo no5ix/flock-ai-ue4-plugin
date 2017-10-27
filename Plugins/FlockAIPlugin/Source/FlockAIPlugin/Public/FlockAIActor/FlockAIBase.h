@@ -14,37 +14,42 @@ class AFlockAIBase : public AActor
 {
 	GENERATED_BODY()
 
-	UPROPERTY(Category = "FlockAI", VisibleDefaultsOnly)
-		USphereComponent* CheckSphere;
+public:
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Flock")
+	USceneComponent* SceneRoot;
 
 	UPROPERTY(Category = "FlockAI", VisibleDefaultsOnly)
-		USkeletalMeshComponent* FlockAIBody;
+	USphereComponent* CheckSphere;
+
+	UPROPERTY(Category = "FlockAI", VisibleDefaultsOnly)
+	USkeletalMeshComponent* FlockAIBody;
 
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
-		float SeparationWeight;
+	float SeparationWeight;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
-		float EnemyWeight;
+	float EnemyWeight;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
-		float MoveToWeight;
+	float MoveToWeight;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
-		float MaxMovementSpeed;
+	float MaxMovementSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
-		float BaseMovementSpeed;
+	float BaseMovementSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
-		float MeetEnemyMovementSpeed;
+	float MeetEnemyMovementSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
-		float BaseTurnSpeed;
+	float BaseTurnSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
-		float MeetEnemyTurnSpeed;
+	float MeetEnemyTurnSpeed;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|OptimizeConfig")
@@ -75,6 +80,8 @@ protected:
 	FVector VectorCharCameraToFlockAI;
 	float VectorSizeCharCameraToFlockAI;
 	float TempDotProduct;
+
+	bool bIsTooFar;
 
 	void ResetComponents();
 

@@ -3,7 +3,8 @@
 #pragma once
 
 #include "GameFramework/Info.h"
-//#include "FlockAIBase.h"
+#include "FlockAILeader.h"
+#include "Components/SplineComponent.h"
 #include "FlockAISpawner.generated.h"
 
 class AFlockAIBase;
@@ -20,26 +21,41 @@ public:
 
 	AFlockAISpawner();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
-		TSubclassOf<AFlockAIBase> FlockAIType;
+	UPROPERTY(VisibleDefaultsOnly, Category = "FlockLeader")
+	USceneComponent* SceneRoot;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Flock|FlockLeader")
+	USplineComponent* SplineComp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
-		int FlockAIAmount;
+	TSubclassOf<AFlockAIBase> FlockAIType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
+	int FlockAIAmount;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
-		float FlockAILifeSpan;
+	float FlockAILifeSpan;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
-		float SpawnDuration;
+	float SpawnDuration;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
-		float SpawnMaxRange;
+	float SpawnMaxRange;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
-		float SpawnMinRange;
+	float SpawnMinRange;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
-		int TickFlockAIAmountPerFrame;
+	int TickFlockAIAmountPerFrame;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flock|Spawner")
+	AFlockAILeader* FlockLeader;
+
+	UPROPERTY(EditAnywhere, Category = "Flock|Spawner")
+	float Speed;
+
+	float CurrentScale;					
+	float SpeedScale;
 
 public:
 
@@ -50,7 +66,6 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 	
-	bool CanProcessTick(uint32 FlockAISerialNum) const;
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAISpawner")
 	//	int CanTickSerialNumber;
