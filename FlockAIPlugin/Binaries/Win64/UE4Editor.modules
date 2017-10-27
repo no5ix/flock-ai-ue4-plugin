@@ -1,0 +1,9 @@
+{
+	"Changelist" : 3450819,
+	"CompatibleChangelist" : 3299760,
+	"BuildId" : "1ddcddb2-7ec6-4aa9-8a33-fc32d2a526e5",
+	"Modules" : 
+	{
+		"FlockAIPlugin" : "UE4Editor-FlockAIPlugin-8436.dll"
+	}
+}
