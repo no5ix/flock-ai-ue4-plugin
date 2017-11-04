@@ -35,7 +35,7 @@ AFlockAIBase::AFlockAIBase()
 	EnemyWeight = 1400.f;
 	MaxMovementSpeed = 600.f;
 	BaseMovementSpeed = 150.f;
-	MeetEnemyMovementSpeed = 300.f;
+	MeetEnemyMovementSpeed = MaxMovementSpeed * 1.2;
 	BaseTurnSpeed = 1.f;
 	MeetEnemyTurnSpeed = 10.f;
 	MoveToWeight = 5.f;
@@ -55,15 +55,18 @@ AFlockAIBase::AFlockAIBase()
 	bIsHasEnemy = false;
 
 	// 
-	CheckSphere = CreateDefaultSubobject<USphereComponent>(TEXT("FlockAICheckSphere"));
-	CheckSphere->SetSphereRadius(10.f);
+	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
+	RootComponent = SceneRoot;
 
-	RootComponent = CheckSphere;
+	CheckSphere = CreateDefaultSubobject<USphereComponent>(TEXT("FlockAICheckSphere"));
+	CheckSphere->SetupAttachment(SceneRoot);
+	CheckSphere->SetSphereRadius(10.0f);
 
 	FlockAIBody = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FlockAIBody"));
-	FlockAIBody->SetupAttachment(CheckSphere);
+	FlockAIBody->SetupAttachment(SceneRoot);
 	FlockAIBody->CastShadow = false;
 	FlockAIBody->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	FlockAIBody->SetComponentTickEnabled(false);
 
 }
 
@@ -143,25 +146,19 @@ void AFlockAIBase::UpdateTickInterval()
 
 	if ( VectorSizeCharCameraToFlockAI > 2000.f )
 	{
-		if (TempDotProduct >= 0.6f)
-		{
-			PrimaryActorTick.TickInterval = 0.12f - FMath::Lerp(0.1f, 0.f, VectorSizeCharCameraToFlockAI / 8000.f);
-		}
-		else
-		{
-			PrimaryActorTick.TickInterval = 0.12f;
-		}
+		bIsTooFar = true;
+		TickIntervalBias = 0.035f;
 	}
 	else 
 	{
+		bIsTooFar = false;
+		CheckSphere->SetComponentTickEnabled(true);
+		FlockAIBody->SetComponentTickEnabled(true);
+		CheckSphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 		if (TempDotProduct >= 0.6f)
-		{
-			PrimaryActorTick.TickInterval = 0.005f * FMath::Lerp(1.f, 3.f, VectorSizeCharCameraToFlockAI / 2000.f);
-		}
+			PrimaryActorTick.TickInterval = 0.01f * FMath::Lerp(1.f, 3.f, VectorSizeCharCameraToFlockAI / 2000.f);
 		else
-		{
-			PrimaryActorTick.TickInterval = VectorSizeCharCameraToFlockAI < 500 ? 0.005f : 0.1f;
-		}
+			PrimaryActorTick.TickInterval = VectorSizeCharCameraToFlockAI < 500 ? 0.03f : 0.05f;
 	}
 }
 

@@ -18,12 +18,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
 		TSubclassOf<AFlockAILeader> FlockAILeaderClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FlockAI|GeneralConfig")
+		float FlySpeed;
+
 public:
 	AFlockAIMoveToLeader();
 
-	bool SetFlockAILeader();
+	bool SetFlockAILeader(AFlockAILeader* FlockLeader);
 
-	//virtual void BeginPlay() override;
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
 protected:
@@ -33,4 +36,25 @@ protected:
 	virtual void CalcMoveToComponent() override;
 
 	virtual void CalcMoveSpeed(const float DeltaTime) override;
+
+	void TurnRound(float DeltaTime);
+
+	void RandMove(float DeltaTime);
+
+private:
+
+	bool bIsRandom;				
+	bool bIsMove;				
+	bool bIsReset;				
+	FVector Distance;			
+	float Radius;				
+	bool bIsNearFlockLeaderl;	
+	float RandSpeed;			
+	FVector LastLocation;		
+	FVector MoveDirection;		
+	float RandMoveDist;			
+	FVector InitLocation;		
+	float RandMoveTime;			
+	float LimitTime;			
+	float RandScale;			
 };
