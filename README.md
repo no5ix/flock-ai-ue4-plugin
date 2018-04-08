@@ -49,19 +49,19 @@ Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 
 	* EQ        =>  Up & Down
 
-	 EQ  键     =>  上下 
+	 	EQ  键     =>  上下 
 
 	* WASD         =>  Basic movement 
 
-	 WASD 键     =>  基本的移动指令(前后左右) 
+	 	WASD 键     =>  基本的移动指令(前后左右) 
 
 	* Hold Left Mouse Button Down  =>  Attract fishes
 
-	 按住鼠标左键           =>  吸引鱼群
+	 	按住鼠标左键           =>  吸引鱼群
 
 	* Arrow UP and Down  =>  Move faster or slower
 
-	 上下箭头键         =>  调整移动速度
+	 	上下箭头键         =>  调整移动速度
 
 
 
@@ -97,13 +97,13 @@ place Plugins folder in your project root directory, then just like
 
 	* Separation : every fish will try to steer away from their neighbors 
 
-	分离性 ：每条鱼都会与周围的鱼保持距离 
+		分离性 ：每条鱼都会与周围的鱼保持距离 
 
 	* Following the leader : every fish will try to follow its leader
 
-	跟随一个领头者 ： 每条鱼都会跟随一个领头者
+		跟随一个领头者 ： 每条鱼都会跟随一个领头者
 
 	* Avoiding enemies.
 
-	躲避敌人
+		躲避敌人
 
