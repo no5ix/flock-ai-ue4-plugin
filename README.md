@@ -35,15 +35,15 @@ Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 
 	* Motion Controller FaceButton1 => Move forward
 
-	 手柄圆盘上键                  => 往前移动
+	 	手柄圆盘上键                  => 往前移动
 
 	* PC's KeyBoard Arrow UP and Down    => Move faster or slower
 
-	 电脑键盘的上下箭头键          =>  调整移动速度
+	 	电脑键盘的上下箭头键          =>  调整移动速度
 
 	* Hold Motion Controller Trigger Down     => Attract fishes
 
-	 按住手柄扳机键                    => 吸引鱼群
+	 	按住手柄扳机键                    => 吸引鱼群
 
 - *PC* :
 
