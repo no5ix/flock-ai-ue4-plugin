@@ -22,9 +22,8 @@ This is packaged by an unoptimized version( check out  branch old_demo)
 
 # Video Preview 
 
-Watch the [Video Preview](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
-
-查看 [**视频演示**](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
+Watch the <i class="fa fa-fw fa-2x fa-play-circle"></i>**Video Preview 视频演示**
+Watch the [**Video Preview 视频演示**](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
 
 
 # How to play
