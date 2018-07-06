@@ -22,7 +22,7 @@ This is packaged by an unoptimized version( check out  branch old_demo)
 
 # Video Preview 
 
-Watch the [**Video Preview 视频演示**](http://v.youku.com/v_show/id_XMTc2NTM4MjkyMA==.html)
+Watch the [**Video Preview 视频演示**](https://hulinhong.com)
 
 
 # How to play
